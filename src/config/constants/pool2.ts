@@ -1,10 +1,11 @@
-import { PoolConfig, QuoteToken, PoolCategory } from './types'
+import tokens from './tokens'
+import { PoolConfig, PoolCategory } from './types'
 
 const pools: PoolConfig[] = [
   {
     sousId: 0,
     tokenName: 'dmd',
-    stakingTokenName: QuoteToken.dmd,
+    stakingTokenName: tokens.dmd,
     stakingTokenAddress: '0x90e892fed501ae00596448aecf998c88816e5c0f',
     contractAddress: {
       4002: '0xd3af5fe61dbaf8f73149bfcfa9fb653ff096029a',
@@ -18,7 +19,7 @@ const pools: PoolConfig[] = [
     isFinished: false,
     tokenDecimals: 18,
   },
- // {
+  // {
   //   sousId: 1,
   //   tokenName: 'TWT',
   //   stakingTokenName: QuoteToken.SYRUP,
