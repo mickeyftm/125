@@ -67,6 +67,19 @@ export interface FarmConfig {
   }
   isTokenOnly?: boolean
 }
+}
+
+export interface SerializedFarmConfig extends FarmConfigBaseProps {
+  token: SerializedToken
+  quoteToken: SerializedToken
+}
+
+export interface DeserializedFarmConfig extends FarmConfigBaseProps {
+  token: Token
+  quoteToken: Token
+}
+
+
 
 export interface PoolConfig {
   sousId: number
@@ -81,6 +94,16 @@ export interface PoolConfig {
   fee?: number
   enableEmergencyWithdraw?: boolean
 }
+export interface SerializedPoolConfig extends PoolConfigBaseProps {
+  earningToken: SerializedToken
+  stakingToken: SerializedToken
+}
+
+export interface DeserializedPoolConfig extends PoolConfigBaseProps {
+  earningToken: Token
+  stakingToken: Token
+}
+
 
 export type Images = {
   lg: string
