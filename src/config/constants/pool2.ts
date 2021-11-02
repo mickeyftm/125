@@ -2,22 +2,20 @@ import tokens from './tokens'
 import { PoolConfig, PoolCategory } from './types'
 
 const pools: PoolConfig[] = [
+
   {
     sousId: 0,
-    tokenName: 'dmd',
-    stakingTokenName: tokens.dmd,
-    stakingTokenAddress: '0x90e892fed501ae00596448aecf998c88816e5c0f',
+    stakingToken: tokens.dmd,
+    earningToken: tokens.dmd,
     contractAddress: {
-      4002: '0xd3af5fe61dbaf8f73149bfcfa9fb653ff096029a',
-      250: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
+      4002: '0x67d7a98dbc2c773048f84071e7a77ea1841f0376',
+      250: '0x7C36c64811219CF9B797C5D9b264d9E7cdade7a4',
     },
     poolCategory: PoolCategory.CORE,
-    projectLink: 'https://pandmdswap.finance/',
     harvest: true,
-    tokenPerBlock: '10',
+    tokenPerBlock: '0.07075471698',
     sortOrder: 1,
     isFinished: false,
-    tokenDecimals: 18,
   },
   // {
   //   sousId: 1,
