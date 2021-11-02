@@ -18,7 +18,7 @@ const pools: PoolConfig[] = [
     isFinished: false,
     tokenDecimals: 18,
   },
-  {
+ // {
   //   sousId: 1,
   //   tokenName: 'TWT',
   //   stakingTokenName: QuoteToken.SYRUP,
