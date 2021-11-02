@@ -1,3 +1,6 @@
+import { serializeToken } from 'state/user/hooks/helpers'
+import { SerializedToken } from './types
+
 const tokens = {
   dmd: {
     symbol: 'DMD',
