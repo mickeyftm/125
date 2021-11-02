@@ -18,3 +18,6 @@ const pools: SerializedPoolConfig[] = [
     sortOrder: 1,
     isFinished: false,
   },
+]
+
+export default pools
