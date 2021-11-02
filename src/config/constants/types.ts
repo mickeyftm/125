@@ -67,7 +67,7 @@ export interface FarmConfig {
   }
   isTokenOnly?: boolean
 }
-}
+
 
 export interface SerializedFarmConfig extends FarmConfigBaseProps {
   token: SerializedToken
