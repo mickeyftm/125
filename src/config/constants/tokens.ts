@@ -1,5 +1,3 @@
-
-
 const tokens = {
   dmd: {
     symbol: 'DMD',
