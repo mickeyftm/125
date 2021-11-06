@@ -140,7 +140,7 @@ export const socials = [
   {
     label: 'Telegram',
     icon: 'TelegramIcon',
-    href: 'https://t.me/darkmatterdefi',
+    href: 'https://t.me/ktmetcrypto0x',
   },
   {
     label: 'Medium',
