@@ -67,16 +67,6 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.dmd,
   },
   {
-    pid: 27,
-    lpSymbol: 'ETH-DMD LP',
-    lpAddresses: {
-      4002: '0x0e48855B9f3DcfD7c8d46385d0fCeed94D3FA3Ac',
-      250: '0x0967B636Ec4C02569d6Cfc4F97fd7Df8Dad4E9A9',
-    },
-    token: tokens.dmd,
-    quoteToken: tokens.eth,
-  },
-  {
     pid: 28,
     lpSymbol: 'BTC-DMD LP',
     lpAddresses: {
@@ -85,7 +75,7 @@ const farms: FarmConfig[] = [
     },
     token: tokens.dmd,
     quoteToken: tokens.btc,
-  }, 
+  },
   {
     pid: 31,
     lpSymbol: 'DOLA-DMD LP',
