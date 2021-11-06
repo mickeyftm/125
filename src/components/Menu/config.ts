@@ -30,14 +30,14 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     href: '/farms',
   },
   {
-    label: t('pools2'),
+    label: t('pools'),
     icon: 'PoolIcon',
-    href: '/pools2',
+    href: '/pools',
   },
   {
     label: t('CommunityPool'),
     icon: 'PoolIcon',
-    href: '/pools22',
+    href: '/pools2',
   },
 
   {

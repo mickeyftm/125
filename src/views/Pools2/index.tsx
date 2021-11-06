@@ -8,7 +8,7 @@ import orderBy from 'lodash/orderBy'
 import partition from 'lodash/partition'
 import { useTranslation } from 'contexts/Localization'
 import usePersistState from 'hooks/usePersistState'
-import { usepools2, useFetchPublicpools2Data, usePollFarmsData, useCakeVault } from 'state/hooks'
+import { usepools, useFetchPublicpoolsData, usePollFarmsData, useCakeVault } from 'state/hooks'
 import { latinise } from 'utils/latinise'
 import FlexLayout from 'components/Layout/Flex'
 import Page from 'components/Layout/Page'
@@ -26,7 +26,7 @@ const Hero = styled.div`
   background-image: url('IMAGE_URL'); /* fallback */
   background-image: linear-gradient(94.61deg, ${({ theme }) => theme.colors.background_2} 15.09%, #9012fe 90.14%);
   ${({ theme }) => theme.mediaQueries.md} {
-    background-image: url('images/pools2/3d-model.png'),
+    background-image: url('images/pools/3d-model.png'),
       linear-gradient(94.61deg, ${({ theme }) => theme.colors.background_2} 15.09%, #9012fe 90.14%); /* W3C */
   }
 
@@ -112,15 +112,15 @@ const SearchWrapper = styled.div`
   }
 `
 
-const NUMBER_OF_pools2_VISIBLE = 12
+const NUMBER_OF_pools_VISIBLE = 12
 
-const pools2: React.FC = () => {
+const pools: React.FC = () => {
   const location = useLocation()
   const { t } = useTranslation()
   const { account } = useWeb3React()
-  const { pools2, userDataLoaded } = usepools2(account)
+  const { pools, userDataLoaded } = usepools(account)
   const [stakedOnly, setStakedOnly] = usePersistState(false, { localStorageKey: 'pancake_pool_staked' })
-  const [numberOfpools2Visible, setNumberOfpools2Visible] = useState(NUMBER_OF_pools2_VISIBLE)
+  const [numberOfpoolsVisible, setNumberOfpoolsVisible] = useState(NUMBER_OF_pools_VISIBLE)
   const [observerIsSet, setObserverIsSet] = useState(false)
   const loadMoreRef = useRef<HTMLDivElement>(null)
   const [viewMode, setViewMode] = usePersistState(ViewMode.TABLE, { localStorageKey: 'pancake_farm_view' })
@@ -135,49 +135,49 @@ const pools2: React.FC = () => {
   const accountHasVaultShares = userShares && userShares.gt(0)
   const performanceFeeAsDecimal = performanceFee && performanceFee / 100
 
-  // const pools2 = useMemo(() => {
-  //   const cakePool = pools2WithoutAutoVault.find((pool) => pool.sousId === 0)
+  // const pools = useMemo(() => {
+  //   const cakePool = poolsWithoutAutoVault.find((pool) => pool.sousId === 0)
   //   const cakeAutoVault = { ...cakePool, isAutoVault: true }
-  //   return [cakeAutoVault, ...pools2WithoutAutoVault]
-  // }, [pools2WithoutAutoVault])
+  //   return [cakeAutoVault, ...poolsWithoutAutoVault]
+  // }, [poolsWithoutAutoVault])
 
   // TODO aren't arrays in dep array checked just by reference, i.e. it will rerender every time reference changes?
-  const [finishedpools2, openpools2] = useMemo(() => partition(pools2, (pool) => pool.isFinished), [pools2])
-  const stakedOnlyFinishedpools2 = useMemo(
+  const [finishedpools, openpools] = useMemo(() => partition(pools, (pool) => pool.isFinished), [pools])
+  const stakedOnlyFinishedpools = useMemo(
     () =>
-      finishedpools2.filter((pool) => {
+      finishedpools.filter((pool) => {
         if (pool.isAutoVault) {
           return accountHasVaultShares
         }
         return pool.userData && new BigNumber(pool.userData.stakedBalance).isGreaterThan(0)
       }),
-    [finishedpools2, accountHasVaultShares],
+    [finishedpools, accountHasVaultShares],
   )
-  const stakedOnlyOpenpools2 = useMemo(
+  const stakedOnlyOpenpools = useMemo(
     () =>
-      openpools2.filter((pool) => {
+      openpools.filter((pool) => {
         if (pool.isAutoVault) {
           return accountHasVaultShares
         }
         return pool.userData && new BigNumber(pool.userData.stakedBalance).isGreaterThan(0)
       }),
-    [openpools2, accountHasVaultShares],
+    [openpools, accountHasVaultShares],
   )
-  const hasStakeInFinishedpools2 = stakedOnlyFinishedpools2.length > 0
+  const hasStakeInFinishedpools = stakedOnlyFinishedpools.length > 0
 
   usePollFarmsData()
-  useFetchPublicpools2Data()
+  useFetchPublicpoolsData()
 
   useEffect(() => {
-    const showMorepools2 = (entries) => {
+    const showMorepools = (entries) => {
       const [entry] = entries
       if (entry.isIntersecting) {
-        setNumberOfpools2Visible((pools2CurrentlyVisible) => pools2CurrentlyVisible + NUMBER_OF_pools2_VISIBLE)
+        setNumberOfpoolsVisible((poolsCurrentlyVisible) => poolsCurrentlyVisible + NUMBER_OF_pools_VISIBLE)
       }
     }
 
     if (!observerIsSet) {
-      const loadMoreObserver = new IntersectionObserver(showMorepools2, {
+      const loadMoreObserver = new IntersectionObserver(showMorepools, {
         rootMargin: '0px',
         threshold: 1,
       })
@@ -186,7 +186,7 @@ const pools2: React.FC = () => {
     }
   }, [observerIsSet])
 
-  const showFinishedpools2 = location.pathname.includes('history')
+  const showFinishedpools = location.pathname.includes('history')
 
   const handleChangeSearchQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value)
@@ -196,18 +196,18 @@ const pools2: React.FC = () => {
     setSortOption(option.value)
   }
 
-  const sortpools2 = (pools2ToSort: Pool[]) => {
+  const sortpools = (poolsToSort: Pool[]) => {
     switch (sortOption) {
       case 'apr':
-        // Ternary is needed to prevent pools2 without APR (like MIX) getting top spot
+        // Ternary is needed to prevent pools without APR (like MIX) getting top spot
         return orderBy(
-          pools2ToSort,
+          poolsToSort,
           (pool: Pool) => (pool.apr ? getAprData(pool, performanceFeeAsDecimal).apr : 0),
           'desc',
         )
       case 'earned':
         return orderBy(
-          pools2ToSort,
+          poolsToSort,
           (pool: Pool) => {
             if (!pool.userData || !pool.earningTokenPrice) {
               return 0
@@ -226,36 +226,36 @@ const pools2: React.FC = () => {
         )
       case 'totalStaked':
         return orderBy(
-          pools2ToSort,
+          poolsToSort,
           (pool: Pool) => (pool.isAutoVault ? totalCakeInVault.toNumber() : pool.totalStaked.toNumber()),
           'desc',
         )
       default:
-        return pools2ToSort
+        return poolsToSort
     }
   }
 
-  const pools2ToShow = () => {
-    let chosenpools2 = []
-    if (showFinishedpools2) {
-      chosenpools2 = stakedOnly ? stakedOnlyFinishedpools2 : finishedpools2
+  const poolsToShow = () => {
+    let chosenpools = []
+    if (showFinishedpools) {
+      chosenpools = stakedOnly ? stakedOnlyFinishedpools : finishedpools
     } else {
-      chosenpools2 = stakedOnly ? stakedOnlyOpenpools2 : openpools2
+      chosenpools = stakedOnly ? stakedOnlyOpenpools : openpools
     }
 
     if (searchQuery) {
       const lowercaseQuery = latinise(searchQuery.toLowerCase())
-      chosenpools2 = chosenpools2.filter((pool) =>
+      chosenpools = chosenpools.filter((pool) =>
         latinise(pool.earningToken.symbol.toLowerCase()).includes(lowercaseQuery),
       )
     }
 
-    return sortpools2(chosenpools2).slice(0, numberOfpools2Visible)
+    return sortpools(chosenpools).slice(0, numberOfpoolsVisible)
   }
 
   const cardLayout = (
     <CardLayout>
-      {pools2ToShow().map((pool) => (
+      {poolsToShow().map((pool) => (
         <PoolCard key={pool.sousId} pool={pool} account={account} />
       ))}
     </CardLayout>
@@ -265,7 +265,7 @@ const pools2: React.FC = () => {
     <>
       <Page>
         <Hero>
-          <Title>{t('Partners pools2')}</Title>
+          <Title>{t('Partners pools')}</Title>
           < Subtitle > {t('Just Stake some tokens to earn.')}</Subtitle>
           <Subtitle bold>{t('👽')}</Subtitle>
         </Hero>
@@ -274,7 +274,7 @@ const pools2: React.FC = () => {
             <PoolTabButtons
               stakedOnly={stakedOnly}
               setStakedOnly={setStakedOnly}
-              hasStakeInFinishedpools2={hasStakeInFinishedpools2}
+              hasStakeInFinishedpools={hasStakeInFinishedpools}
               viewMode={viewMode}
               setViewMode={setViewMode}
             />
@@ -311,14 +311,14 @@ const pools2: React.FC = () => {
                 {t('Search')}
               </Text>
               <ControlStretch>
-                <SearchInput onChange={handleChangeSearchQuery} placeholder="Search pools2" />
+                <SearchInput onChange={handleChangeSearchQuery} placeholder="Search pools" />
               </ControlStretch>
             </TabWrapper>
           </SearchWrapper>
         </PoolControls>
-        {showFinishedpools2 && (
+        {showFinishedpools && (
           <Text fontSize="20px" color="failure" pb="32px">
-            {t('These pools2 are no longer distributing rewards. Please unstake your tokens.')}
+            {t('These pools are no longer distributing rewards. Please unstake your tokens.')}
           </Text>
         )}
         {cardLayout}
@@ -328,4 +328,4 @@ const pools2: React.FC = () => {
   )
 }
 
-export default pools2
+export default pools
