@@ -9,11 +9,11 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     icon: 'HomeIcon',
     href: '/',
   },
-  // {
-  //   label: t('PreSale'),
-  //   icon: 'PresaleIcon',
-  //   href: '/presale',
-  // },
+  {
+    label: t('PreSale'),
+    icon: 'PresaleIcon',
+    href: '/presale',
+  },
   {
     label: t('Trade'),
     icon: 'TradeIcon',
