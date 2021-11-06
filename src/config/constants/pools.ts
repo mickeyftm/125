@@ -155,14 +155,14 @@ const pools: PoolConfig[] = [
   {
     sousId: 31,
     stakingToken: tokens.dmd,
-    earningToken: tokens.usdc,
+    earningToken: tokens.dai,
     contractAddress: {
       4002: '',
-      250: '0xA785535A2d8d8f5C414B8359BA2B79e2261306eC',
+      250: '0x28b75A0304078Dee675a8d2700a35a04Fb6CbB11',
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,
-    tokenPerBlock: '0.002480',
+    tokenPerBlock: '0.0001',
     sortOrder: 999,
     isFinished: false,
   },
