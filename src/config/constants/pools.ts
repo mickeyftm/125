@@ -153,7 +153,7 @@ const pools: PoolConfig[] = [
   },
 
   {
-    sousId: ,
+    sousId: 2,
     stakingToken: tokens.dmd,
     earningToken: tokens.dai,
     contractAddress: {
