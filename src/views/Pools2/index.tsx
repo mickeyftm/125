@@ -214,12 +214,12 @@ const Pools: React.FC = () => {
             }
             return pool.isAutoVault
               ? getCakeVaultEarnings(
-                  account,
-                  cakeAtLastUserAction,
-                  userShares,
-                  pricePerFullShare,
-                  pool.earningTokenPrice,
-                ).autoUsdToDisplay
+                account,
+                cakeAtLastUserAction,
+                userShares,
+                pricePerFullShare,
+                pool.earningTokenPrice,
+              ).autoUsdToDisplay
               : pool.userData.pendingReward.times(pool.earningTokenPrice).toNumber()
           },
           'desc',
@@ -265,9 +265,9 @@ const Pools: React.FC = () => {
     <>
       <Page>
         <Hero>
-          <Title>{t('Pools')}</Title>
-          <Subtitle>{t('Just Stake some tokens to earn.')}</Subtitle>
-          <Subtitle bold>{t('High APR, low risk.')}</Subtitle>
+          <Title>{t('Partners Pools'')}</Title>
+            < Subtitle > { t('Just Stake some tokens to earn.') }</Subtitle>
+          <Subtitle bold>{t('👽')}</Subtitle>
         </Hero>
         <PoolControls>
           <SwitchWrapper>
