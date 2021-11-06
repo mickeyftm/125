@@ -265,8 +265,8 @@ const Pools: React.FC = () => {
     <>
       <Page>
         <Hero>
-          <Title>{t('Partners Pools'')}</Title>
-            < Subtitle > { t('Just Stake some tokens to earn.') }</Subtitle>
+          <Title>{t('Partners Pools')}</Title>
+          < Subtitle > {t('Just Stake some tokens to earn.')}</Subtitle>
           <Subtitle bold>{t('👽')}</Subtitle>
         </Hero>
         <PoolControls>
