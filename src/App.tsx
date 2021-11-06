@@ -60,9 +60,6 @@ const App: React.FC = () => {
             <Route path="/pools">
               <Pools />
             </Route>
-            <Route path="/pools2">
-              <Pools />
-            </Route>
             {/* <Route path="/presale">
               <PreSale />
             </Route> */}
