@@ -60,9 +60,9 @@ const App: React.FC = () => {
             <Route path="/pools">
               <Pools />
             </Route>
-            {/* <Route path="/presale">
+            <Route path="/presale">
               <PreSale />
-            </Route> */}
+            </Route>
             {/* 404 */}
             <Route component={NotFound} />
           </Switch>
