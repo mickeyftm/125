@@ -11,4 +11,10 @@ export default {
     250: '0x4aad757bae148528335339f350ab08e70094e190',
     4002: '0x742c3124ab6c92d4b6b5b73ecdff21ba423d3351',
   },
+
+  dmdVault: {
+    250: '0xe1930eA19a0a17AcbBADCaAF31F49c6b8Dd2c88c',
+    4002: '',
+  },
+
 }
