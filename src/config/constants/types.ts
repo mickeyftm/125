@@ -3,7 +3,7 @@ import { SerializedBigNumber, TranslatableText } from 'state/types'
 
 export interface Address {
   4002?: string
-  250: string
+  25: string
 }
 
 export interface Token {
